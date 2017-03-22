@@ -69,6 +69,14 @@ class Editor {
     return this.selectionManager.getSelection();
   }
 
+  addSelectionListener(callback) {
+    this.onSelect.add(callback);
+  }
+
+  removeSelectionListener(callback) {
+    this.onSelect.remove(callback);
+  }
+
   onKeyAdded() {
     this.undoManager.addState();
     this.render(false, false, true);

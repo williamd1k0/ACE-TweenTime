@@ -1,11 +1,21 @@
 os: osx
 language: node_js
 node_js:
-  - "node"
+- node
 before_install:
-  - npm install -g gulp
-  - npm install -g bower
+- npm install -g gulp --quiet
+- npm install -g bower --quiet
 install:
-  - npm install -d
-  - bower install
+- npm install -d --quiet
+- bower install
 script: gulp build
+before_deploy: python -c "import shutil; shutil.make_archive('ACE-Timeline', 'zip', 'dist/')"
+deploy:
+  provider: releases
+  api_key:
+    secure: O5ftVa5UEFlEKUPqmT6Wv/7qCmpr8Wp6qN4CjBanac1g5UxBWHl3m5zst/v53yw+Upw7pvwIIa9L8GfQRrwJBU/Lw/hFdfGGONC2jtUrD8b3jLooOij5+JWh9vP+P18GOOrNIPtaUTBfsDkyfHuCFgZOQDKp738LXHd0oyCCe2mrg0C2wBk8RKs8cF7FppJVB1UC0jB/2I0YdBxcxfBDAYmNs/1AD+MajMuco6oQI3RkVRM2c9V7C8GW6YzXA+t1v49Sz1bzB6HCZ+X019rkRjdZ8d3OdKiMZx7EaBs5DP5ztrYXbiuS+tx0F1nqNRGXm8z4iXUtE2XnYVp8Sj72d6VpDyK+AZz8TcrsXA3RQlkoS/WMxUifeLbdUTFYHiGrpXckjb/LVc7CVrdCjRasC1iHqkGbjvoUFVrREKWC7bBQZ+99MHLDBDN368d1P2ph1JjZXY5INkIODtM8dzU+zDuN8f72Hs+1x/ckffqtBCaJ7BwCB+qR3RKKYkhEPbCejpT82QTEvOZYfh2aKbPbprHivA8ChlBfz9cKAmzJ4TLR8RhqOr/pZxx51cruaC78njfStL+/PPT3lIhai+J3huBFKD2Z/0z3PY1as4Aedg0JwO0JmwGsxbVrcaY/jkKKl59m3PfrNql16qkLBtCyB3FiSCv3kPEIsDw1NW8QJEU=
+  file: ACE-Timeline.zip
+  skip_cleanup: true
+  on:
+    repo: viniciusguerra/ACE-TweenTime
+    tags: true

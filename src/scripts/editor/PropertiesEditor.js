@@ -56,9 +56,11 @@ export default class PropertiesEditor {
     }
 
     // When selecting anything, automatically display the properties editor.
-    if (this.items.length) {
-      this.parentElement.removeClass('properties-is-closed');
-    }
+    // REDMINE: Ginger V1 #371
+    // Commented this block for overriding properties editor
+    // if (this.items.length) {
+    //   this.parentElement.removeClass('properties-is-closed');
+    // }
   }
 
   addProperty(data) {

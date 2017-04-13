@@ -45,6 +45,7 @@ class Editor {
 
     // Public events.
     this.onSelect = new Signals.Signal();
+    this.onClearTimeline = new Signals.Signal();
     var self = this;
     this.selectionManager.onSelect.add(function(selection, addToSelection) {
       // Propagate the event.
@@ -76,6 +77,14 @@ class Editor {
   removeSelectionListener(callback) {
     this.onSelect.remove(callback);
   }
+
+  addClearTimelineListener(callback) {
+    this.onClearTimeline.add(callback);
+  }
+
+  removeClearTimelineListener(callback) {
+    this.onClearTimeline.remove(callback);
+  }  
 
   onKeyAdded() {
     this.undoManager.addState();

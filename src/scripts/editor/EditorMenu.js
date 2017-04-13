@@ -9,6 +9,7 @@ export default class EditorMenu {
     this.initExport();
     this.initToggle();
     this.initCurveToggle();
+    this.clearTimeline();
   }
 
   initToggle() {

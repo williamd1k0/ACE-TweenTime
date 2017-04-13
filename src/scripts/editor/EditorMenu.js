@@ -51,4 +51,10 @@ export default class EditorMenu {
       this.editor.render(false, false, true);
     });
   }
+
+  clearTimeline() {
+    this.$timeline.find('[data-action="clear-timeline"]').click((e) => {
+      e.preventDefault();
+      this.editor.onClearTimeline.dispatch();
+  }
 }

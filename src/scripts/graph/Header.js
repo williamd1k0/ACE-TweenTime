@@ -121,7 +121,7 @@ export default class Header {
       //ginger sidenav width offset will be calculated and applied to time handle whenever drag is called
       //if drag is not called, offset will be set to 0
       var gingerSidenavWidth = $("div.md-sidenav-content").css("transform").split(",")[4];
-      this.gingerDragOffset = gingerSidenavWidth;
+      this.gingerDragOffset = parseFloat(gingerSidenavWidth);
 
       var timeMatch = false;
       if (event.shiftKey) {

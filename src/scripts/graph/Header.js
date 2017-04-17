@@ -21,6 +21,8 @@ export default class Header {
     this.xDisplayed = d3.time.scale().range([0, width]);
     this.xDisplayed.domain(this.initialDomain);
 
+    this.gingerDragOffset = 0;
+
     this.xAxis = d3.svg.axis()
       .scale(this.x)
       .orient('top')
@@ -98,7 +100,9 @@ export default class Header {
 
   render() {
     var timeSelection = this.svgContainer.selectAll('.time-indicator');
-    timeSelection.attr('transform', 'translate(' + this.xDisplayed(this.currentTime[0]) + ', 25)');
+    timeSelection.attr('transform', 'translate(' + this.xDisplayed(this.currentTime[0]) - gingerDragOffset + ', 25)');
+
+    this.gingerDragOffset = 0;
   }
 
   createTimeHandle() {
@@ -112,6 +116,12 @@ export default class Header {
       var dx = self.xDisplayed.invert(event_x - self.margin.left);
       dx = dx.getTime();
       dx = Math.max(0, dx);
+
+      //REDMINE: Ginger V1 #374
+      //ginger sidenav width offset will be calculated and applied to time handle whenever drag is called
+      //if drag is not called, offset will be set to 0
+      var gingerSidenavWidth = $("div.md-sidenav-content").css('transform').split(',')[4];
+      this.gingerDragOffset = -gingerSidenavWidth;
 
       var timeMatch = false;
       if (event.shiftKey) {

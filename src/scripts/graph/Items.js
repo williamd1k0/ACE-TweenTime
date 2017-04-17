@@ -21,7 +21,10 @@ export default class Items {
     };
 
     const dragmove = function(d) {
-      const dx = self.timeline.x.invert(d3.event.x).getTime() / 1000;
+      //REDMINE: Ginger V1 #372
+      //sets minimum value of start of clip to be 0
+      const dx = Math.max(self.timeline.x.invert(d3.event.x).getTime() / 1000, 0);
+
       const diff = dx - d.start;
       d.start += diff;
       d.end += diff;
@@ -41,7 +44,11 @@ export default class Items {
     const dragmoveLeft = function(d) {
       d3.event.sourceEvent.stopPropagation();
       var sourceEvent = d3.event.sourceEvent;
-      var dx = self.timeline.x.invert(d3.event.x).getTime() / 1000;
+
+      //REDMINE: Ginger V1 #372
+      //sets minimum value of start of clip to be 0
+      var dx = Math.max(self.timeline.x.invert(d3.event.x).getTime() / 1000, 0);
+
       var timeMatch = false;
       if (sourceEvent.shiftKey) {
         timeMatch = Utils.getClosestTime(tweenTime.data, dx, d.id, false, tweenTime.timer);
@@ -58,7 +65,9 @@ export default class Items {
     const dragmoveRight = function(d) {
       d3.event.sourceEvent.stopPropagation();
       var sourceEvent = d3.event.sourceEvent;
+
       var dx = self.timeline.x.invert(d3.event.x).getTime() / 1000;
+      
       var timeMatch = false;
       if (sourceEvent.shiftKey) {
         timeMatch = Utils.getClosestTime(tweenTime.data, dx, false, false, tweenTime.timer);

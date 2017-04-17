@@ -100,7 +100,7 @@ export default class Header {
 
   render() {
     var timeSelection = this.svgContainer.selectAll('.time-indicator');
-    timeSelection.attr('transform', 'translate(' + this.xDisplayed(this.currentTime[0]) - gingerDragOffset + ', 25)');
+    timeSelection.attr('transform', 'translate(' + (this.xDisplayed(this.currentTime[0]) - this.gingerDragOffset) + ', 25)');
 
     this.gingerDragOffset = 0;
   }

@@ -9,6 +9,7 @@ export default class EditorMenu {
     this.initExport();
     this.initToggle();
     this.initCurveToggle();
+    this.clearTimeline();
   }
 
   initToggle() {
@@ -56,6 +57,6 @@ export default class EditorMenu {
     this.$timeline.find('[data-action="clear-timeline"]').click((e) => {
       e.preventDefault();
       this.editor.onClearTimeline.dispatch();
-    }
+    });
   }
 }

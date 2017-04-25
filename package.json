@@ -3,11 +3,12 @@
   "version": "3.0.2",
   "author": "stimul.ch / David Mignot",
   "dependencies": {
-    "file-saver": "*",
     "d3": "^3.5.2",
     "draggable-number.js": "^0.4.4",
+    "file-saver": "*",
     "gsap": "^1.18.0",
     "jquery": "^2.1.1",
+    "jquery-contextmenu": "^2.4.4",
     "lodash": "^3.8.0",
     "signals": "^1.0.0",
     "spectrum-colorpicker": "^1.5.2"

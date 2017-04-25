@@ -46,6 +46,7 @@ class Editor {
     // Public events.
     this.onSelect = new Signals.Signal();
     this.onClearTimeline = new Signals.Signal();
+    this.onCloseGaps = new Signals.Signal();
     var self = this;
     this.selectionManager.onSelect.add(function(selection, addToSelection) {
       // Propagate the event.
@@ -84,6 +85,14 @@ class Editor {
 
   removeClearTimelineListener(callback) {
     this.onClearTimeline.remove(callback);
+  }
+
+  addCloseGapsListener(callback) {
+    this.onCloseGaps.add(callback);
+  }
+
+  removeCloseGapsListener(callback) {
+    this.onCloseGaps.remove(callback);
   }  
 
   onKeyAdded() {

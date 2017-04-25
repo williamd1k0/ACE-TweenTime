@@ -10,6 +10,7 @@ export default class EditorMenu {
     this.initToggle();
     this.initCurveToggle();
     this.clearTimeline();
+    this.closeGaps();
   }
 
   initToggle() {
@@ -57,6 +58,13 @@ export default class EditorMenu {
     this.$timeline.find('[data-action="clear-timeline"]').click((e) => {
       e.preventDefault();
       this.editor.onClearTimeline.dispatch();
+    });
+  }
+
+  closeGaps() {
+    this.$timeline.find('[data-action="close-gaps"]').click((e) => {
+      e.preventDefault();
+      this.editor.onCloseGaps.dispatch();
     });
   }
 }

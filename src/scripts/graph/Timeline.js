@@ -29,10 +29,10 @@ export default class Timeline {
 
     this.onUpdate = this.onUpdate.bind(this);
 
-    // Make the domain cover 20% of the totalDuation by default.
+    // Make the domain cover 2/3 of the totalDuration by default.
     this.initialDomain = [];
     this.initialDomain[0] = options.domainStart || 0;
-    this.initialDomain[1] = options.domainEnd || this.timer.totalDuration * 0.2;
+    this.initialDomain[1] = options.domainEnd || this.timer.totalDuration * 0.666;
 
     // Adapt time to be greater or equal to domainStart.
     if (this.initialDomain[0] > this.timer.getCurrentTime()) {

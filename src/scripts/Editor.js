@@ -67,7 +67,7 @@ class Editor {
     this.enableCutKeypress = true;
     this.enableDeleteKeypress = true;
 
-    $(document).keyup((e) => {
+    $(document).keypress((e) => {
       if (this.enableCutKeypress)
       {
         if (e.charCode === 99 || e.charCode === 67) {
@@ -77,10 +77,10 @@ class Editor {
       }
     });
 
-    $(document).keyup((e) => {
+    $(document).keypress((e) => {
       if (this.enableDeleteKeypress)
       {
-        if (e.keyCode === 46) {
+        if (e.charCode === 46) {
           // delete clip when pressing del
           this.deleteClip();
         }

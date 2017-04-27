@@ -77,10 +77,11 @@ class Editor {
       }
     });
 
-    $(document).keypress((e) => {
+    $(document).keyup((e) => {
       if (this.enableDeleteKeypress)
       {
-        if (e.charCode === 46) {
+        var keyCode = e.keyCode || e.which; 
+        if(keyCode == 46) {
           // delete clip when pressing del
           this.deleteClip();
         }

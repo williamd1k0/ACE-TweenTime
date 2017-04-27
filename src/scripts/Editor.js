@@ -22,6 +22,7 @@ class Editor {
     this.forceItemsRender = this.forceItemsRender.bind(this);
 
     this.splitClip = this.splitClip.bind(this);
+    this.deleteClip = this.deleteClip.bind(this);
 
     var el = options.el || $('body');
     this.el = el;
@@ -50,6 +51,7 @@ class Editor {
     this.onClearTimeline = new Signals.Signal();
     this.onCloseGaps = new Signals.Signal();
     this.onSplitClip = new Signals.Signal();
+    this.onDeleteClip = new Signals.Signal();
 
     var self = this;
     this.selectionManager.onSelect.add(function(selection, addToSelection) {
@@ -63,13 +65,24 @@ class Editor {
     window.requestAnimationFrame(() => this.update());
 
     this.enableCutKeypress = true;
+    this.enableDeleteKeypress = true;
 
-    $(document).keypress((e) => {
+    $(document).keyup((e) => {
       if (this.enableCutKeypress)
       {
         if (e.charCode === 99 || e.charCode === 67) {
           // split clip when pressing c or C
           this.splitClip();
+        }
+      }
+    });
+
+    $(document).keyup((e) => {
+      if (this.enableDeleteKeypress)
+      {
+        if (e.keyCode === 46) {
+          // delete clip when pressing del
+          this.deleteClip();
         }
       }
     });
@@ -85,6 +98,12 @@ class Editor {
     };
 
     this.onSplitClip.dispatch(splitData);
+  }
+
+  deleteClip() {
+    let selection = this.selectionManager.getSelection();
+
+    this.onDeleteClip.dispatch(selection);
   }
 
   forceItemsRender() {

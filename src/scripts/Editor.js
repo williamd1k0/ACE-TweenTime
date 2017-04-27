@@ -21,6 +21,8 @@ class Editor {
 
     this.forceItemsRender = this.forceItemsRender.bind(this);
 
+    this.splitClip = this.splitClip.bind(this);
+
     var el = options.el || $('body');
     this.el = el;
     this.$timeline = $(tpl_timeline());
@@ -47,6 +49,8 @@ class Editor {
     this.onSelect = new Signals.Signal();
     this.onClearTimeline = new Signals.Signal();
     this.onCloseGaps = new Signals.Signal();
+    this.onSplitClip = new Signals.Signal();
+
     var self = this;
     this.selectionManager.onSelect.add(function(selection, addToSelection) {
       // Propagate the event.
@@ -57,6 +61,30 @@ class Editor {
     window.editorEnabled = true;
     window.dispatchEvent(new Event('resize'));
     window.requestAnimationFrame(() => this.update());
+
+    this.enableCutKeypress = true;
+
+    $(document).keypress((e) => {
+      if (this.enableCutKeypress)
+      {
+        if (e.charCode === 99 || e.charCode === 67) {
+          // split clip when pressing c or C
+          this.splitClip();
+        }
+      }
+    });
+  }
+
+  splitClip() {
+    let selection = this.selectionManager.getSelection();
+    let time = this.timer.getCurrentTime();
+
+    let splitData = {
+      "selection": selection,
+      "time": time
+    };
+
+    this.onSplitClip.dispatch(splitData);
   }
 
   forceItemsRender() {

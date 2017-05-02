@@ -83,14 +83,14 @@ export default class Items {
 
     const onDragRelease = function(d) {
       self.timeline.editor.onClipUpdate.dispatch();
-    }
+    };
 
     const dragLeft = d3.behavior.drag()
       .origin(function() {
         var t = d3.select(this);
         return {x: t.attr('x'), y: t.attr('y')};
       })
-      .on('drag', dragmoveLeft);
+      .on('drag', dragmoveLeft)
       .on('mouseup', onDragRelease);
 
     const dragRight = d3.behavior.drag()

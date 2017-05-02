@@ -52,6 +52,7 @@ class Editor {
     this.onCloseGaps = new Signals.Signal();
     this.onSplitClip = new Signals.Signal();
     this.onDeleteClip = new Signals.Signal();
+    this.onClipUpdate = new Signals.Signal();
 
     var self = this;
     this.selectionManager.onSelect.add(function(selection, addToSelection) {

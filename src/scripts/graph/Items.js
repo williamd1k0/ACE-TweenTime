@@ -81,26 +81,33 @@ export default class Items {
       self.onUpdate.dispatch();
     };
 
+    const onDragRelease = function(d) {
+      self.timeline.editor.onClipUpdate.dispatch();
+    }
+
     const dragLeft = d3.behavior.drag()
       .origin(function() {
         var t = d3.select(this);
         return {x: t.attr('x'), y: t.attr('y')};
       })
       .on('drag', dragmoveLeft);
+      .on('mouseup', onDragRelease);
 
     const dragRight = d3.behavior.drag()
       .origin(function() {
         var t = d3.select(this);
         return {x: t.attr('x'), y: t.attr('y')};
       })
-      .on('drag', dragmoveRight);
+      .on('drag', dragmoveRight)
+      .on('mouseup', onDragRelease);
 
     const drag = d3.behavior.drag()
       .origin(function() {
         var t = d3.select(this);
         return {x: t.attr('x'), y: t.attr('y')};
       })
-      .on('drag', dragmove);
+      .on('drag', dragmove)
+      .on('mouseup', onDragRelease);
 
     const bar_border = 1;
     const bar = this.container.selectAll('.line-grp')

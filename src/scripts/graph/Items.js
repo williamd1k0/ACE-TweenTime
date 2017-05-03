@@ -90,21 +90,24 @@ export default class Items {
         var t = d3.select(this);
         return {x: t.attr('x'), y: t.attr('y')};
       })
-      .on('drag', dragmoveLeft);
+      .on('drag', dragmoveLeft)
+      .on('dragend', onDragRelease);
 
     const dragRight = d3.behavior.drag()
       .origin(function() {
         var t = d3.select(this);
         return {x: t.attr('x'), y: t.attr('y')};
       })
-      .on('drag', dragmoveRight);
+      .on('drag', dragmoveRight)
+      .on('dragend', onDragRelease);
 
     const drag = d3.behavior.drag()
       .origin(function() {
         var t = d3.select(this);
         return {x: t.attr('x'), y: t.attr('y')};
       })
-      .on('drag', dragmove);
+      .on('drag', dragmove)
+      .on('dragend', onDragRelease);
 
     const bar_border = 1;
     const bar = this.container.selectAll('.line-grp')
@@ -137,16 +140,14 @@ export default class Items {
       .attr('y', 2)
       .attr('height', 16)
       .attr('width', 6)
-      .call(dragLeft)
-      .on('dragend', onDragRelease);
+      .call(dragLeft);
 
     barContainerRight.append('rect')
       .attr('class', 'bar-anchor bar-anchor--right')
       .attr('y', 2)
       .attr('height', 16)
       .attr('width', 6)
-      .call(dragRight)
-      .on('dragend', onDragRelease);
+      .call(dragRight);
 
     self.dy = 10 + this.timeline.margin.top;
     bar.attr('transform', function(d) {
@@ -202,8 +203,7 @@ export default class Items {
         // Don't trigger mousedown on linescontainer else
         // it create the selection rectangle
         d3.event.stopPropagation();
-      })
-      .on('dragend', onDragRelease);
+      });
 
     barEnter.append('text')
       .attr('class', 'line-label')

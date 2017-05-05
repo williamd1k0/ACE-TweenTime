@@ -67,7 +67,6 @@ class Editor {
 
     this.enableCutKeypress = true;
     this.enableDeleteKeypress = true;
-    this.enablePlayKeypress = true;
 
     this.createKeyOnDoubleClick = true;
 

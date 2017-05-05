@@ -8,8 +8,10 @@ export default class EditorControls {
     this.initControls();
     this.$time_end.val(this.tweenTime.timer.getDuration());
 
+    this.enablePlayKeypress = true;
+
     $(document).keypress((e) => {
-      if(this.$timeline.editor.enablePlayKeypress)
+      if(this.enablePlayKeypress)
       {
         if (e.charCode === 32) {
           // Space

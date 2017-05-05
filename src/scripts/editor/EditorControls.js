@@ -9,9 +9,12 @@ export default class EditorControls {
     this.$time_end.val(this.tweenTime.timer.getDuration());
 
     $(document).keypress((e) => {
-      if (e.charCode === 32) {
-        // Space
-        this.playPause();
+      if(this.$timeline.editor.enablePlayKeypress)
+      {
+        if (e.charCode === 32) {
+          // Space
+          this.playPause();
+        }
       }
     });
   }

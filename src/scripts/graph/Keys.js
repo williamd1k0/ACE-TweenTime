@@ -147,6 +147,7 @@ export default class Keys {
 
     var dragend = function() {
       self.timeline.editor.undoManager.addState();
+      self.timeline.editor.onClipUpdate.dispatch(d);
     };
 
     var drag = d3.behavior.drag()

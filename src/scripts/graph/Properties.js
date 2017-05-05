@@ -53,33 +53,36 @@ export default class Properties {
       .attr('width', self.timeline.x(self.timeline.timer.totalDuration + 100))
       .attr('height', self.timeline.lineHeight)
       .on('dblclick', function(d) {
-        const lineValue = d._line;
-        let def = d.default ? d.default : 0;
-        const mouse = d3.mouse(this);
-        let dx = self.timeline.x.invert(mouse[0]);
-        dx = dx.getTime() / 1000;
-        const prevKey = Utils.getPreviousKey(d.keys, dx);
-        // set the value to match the previous key if we found one
-        if (prevKey) {
-          def = prevKey.val;
-        }
-        //d._line = lineValue;
-        const newKey = {
-          time: dx,
-          val: def,
-          _property: d
-        };
-        if (core.options.defaultEase) {
-          newKey.ease = core.options.defaultEase;
-        }
+        if(self.timeline.editor.createKeyOnDoubleClick)
+        {
+          const lineValue = d._line;
+          let def = d.default ? d.default : 0;
+          const mouse = d3.mouse(this);
+          let dx = self.timeline.x.invert(mouse[0]);
+          dx = dx.getTime() / 1000;
+          const prevKey = Utils.getPreviousKey(d.keys, dx);
+          // set the value to match the previous key if we found one
+          if (prevKey) {
+            def = prevKey.val;
+          }
+          //d._line = lineValue;
+          const newKey = {
+            time: dx,
+            val: def,
+            _property: d
+          };
+          if (core.options.defaultEase) {
+            newKey.ease = core.options.defaultEase;
+          }
 
-        d.keys.push(newKey);
-        // Sort the keys for tweens creation
-        d.keys = Utils.sortKeys(d.keys);
-        lineValue._isDirty = true;
+          d.keys.push(newKey);
+          // Sort the keys for tweens creation
+          d.keys = Utils.sortKeys(d.keys);
+          lineValue._isDirty = true;
 
-        lineValue._isDirty = true;
-        self.onKeyAdded.dispatch(newKey);
+          lineValue._isDirty = true;
+          self.onKeyAdded.dispatch(newKey);
+        }
       });
 
     // Mask

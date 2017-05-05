@@ -83,7 +83,7 @@ export default class Items {
 
     const onDragRelease = function(d) {
       self.timeline.editor.onClipUpdate.dispatch(d);
-    };      
+    };
 
     const dragLeft = d3.behavior.drag()
       .origin(function() {

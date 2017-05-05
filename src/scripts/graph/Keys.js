@@ -145,7 +145,7 @@ export default class Keys {
       self.timeline.selectionManager.select(key_data, addToSelection);
     };
 
-    var dragend = function() {
+    var dragend = function(d) {
       self.timeline.editor.undoManager.addState();
       self.timeline.editor.onClipUpdate.dispatch(d);
     };
